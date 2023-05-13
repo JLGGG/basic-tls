@@ -10,11 +10,11 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Manually set the GMP library and include paths
-set(GMP_LIBRARY "/usr/local/lib/libgmp.dylib") 
-set(GMP_INCLUDE_DIR "/usr/local/include")  
+include_directories("/usr/local/include")
+include_directories("/usr/local/lib")
 
-# # Find Nettle
-# find_package(Nettle REQUIRED)
+set(GMP_LIBRARY "/usr/local/lib/libgmp.a")
+set(GMPXX_LIBRARY "/usr/local/lib/libgmpxx.a")
 
 FetchContent_Declare(fmt
     GIT_REPOSITORY https://github.com/fmtlib/fmt.git

@@ -10,10 +10,10 @@ add_library(${PROJECT_NAME} STATIC ${SOURCE})
 target_link_libraries(${PROJECT_NAME} PUBLIC 
     fmt::fmt
     ${GMP_LIBRARY}
+    ${GMPXX_LIBRARY}
 )
 target_include_directories(${PROJECT_NAME} PUBLIC 
     src
-    ${GMP_INCLUDE_DIR}
 )
 
 # For testing
@@ -26,9 +26,5 @@ if(INSTALL_GTEST)
     target_link_libraries(${PROJECT_NAME}_test PRIVATE 
         gtest_main
         ${PROJECT_NAME}
-        ${GMP_LIBRARY}
-    )
-    target_include_directories(${PROJECT_NAME}_test PRIVATE 
-        ${GMP_INCLUDE_DIR}
     )
 endif()
