@@ -1,23 +1,34 @@
-cmake_minimum_required(VERSION 3.23)
-project(tls_core)
+MESSAGE(STATUS "===============================")
+MESSAGE(STATUS "TLS Core Configuration")
+MESSAGE(STATUS "===============================")
+project(tls)
 
-file(GLOB SOURCE "src/*")
-file(GLOB TEST_SOURCE "gtest/*")
+file(GLOB SOURCE CONFIGURE_DEPENDS "src/*")
 
-add_executable(${PROJECT_NAME} ${SOURCE})
-add_executable(${PROJECT_NAME}_test ${TEST_SOURCE})
+add_library(${PROJECT_NAME} STATIC ${SOURCE})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE 
+target_link_libraries(${PROJECT_NAME} PUBLIC 
     fmt::fmt
     ${GMP_LIBRARY}
-    # nettle
 )
-target_include_directories(${PROJECT_NAME} PRIVATE 
+target_include_directories(${PROJECT_NAME} PUBLIC 
+    src
     ${GMP_INCLUDE_DIR}
-    # ${NETTLE_INCLUDE_DIR}
 )
 
 # For testing
-target_link_libraries(${PROJECT_NAME}_test PRIVATE 
-    gtest_main
-)
+if(INSTALL_GTEST)
+    MESSAGE(STATUS "GTEST ON")
+
+    file(GLOB TEST_SOURCE CONFIGURE_DEPENDS "gtest/*")
+
+    add_executable(${PROJECT_NAME}_test ${TEST_SOURCE})
+    target_link_libraries(${PROJECT_NAME}_test PRIVATE 
+        gtest_main
+        ${PROJECT_NAME}
+        ${GMP_LIBRARY}
+    )
+    target_include_directories(${PROJECT_NAME}_test PRIVATE 
+        ${GMP_INCLUDE_DIR}
+    )
+endif()
