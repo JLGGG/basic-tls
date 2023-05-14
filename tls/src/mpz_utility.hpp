@@ -7,7 +7,7 @@
 #include <iomanip>
 #include <sstream>
 
-#include <cassert>
+#include <stdexcept>
 
 mpz_class nextPrime(mpz_class n) {
     mpz_class r;
@@ -18,7 +18,7 @@ mpz_class nextPrime(mpz_class n) {
 // return base^exp % mod
 mpz_class powm(mpz_class base, mpz_class exp, mpz_class mod) {
     mpz_class r;
-    assert (mod);
+    if (mod == 0) throw std::invalid_argument("mod cannot be 0");
     mpz_powm(r.get_mpz_t(), base.get_mpz_t(), exp.get_mpz_t(), mod.get_mpz_t());
     return r;
 }
