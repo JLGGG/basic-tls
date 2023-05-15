@@ -1,12 +1,10 @@
 #pragma once
-#include <gmp.h>
 #include <gmpxx.h>
 #include <random>
 
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-
 #include <stdexcept>
 
 mpz_class nextPrime(mpz_class n) {

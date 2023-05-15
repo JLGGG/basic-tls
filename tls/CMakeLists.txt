@@ -5,7 +5,8 @@ project(tls)
 
 file(GLOB SOURCE CONFIGURE_DEPENDS "src/*")
 
-add_library(${PROJECT_NAME} STATIC ${SOURCE})
+add_library(${PROJECT_NAME} STATIC ${SOURCE} ${BACKWARD_ENABLE})
+add_backward(${PROJECT_NAME})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC 
     fmt::fmt
