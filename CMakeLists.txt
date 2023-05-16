@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.23)
 project(tls_main)
 
-include(FetchContent)
-
 set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -25,6 +23,9 @@ set(CMAKE_CXX_COMPILER /usr/bin/g++ CACHE PATH "" FORCE)
 message("CMAKE_C_COMPILER: ${CMAKE_C_COMPILER}")
 message("CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
 
+include(FetchContent)
+# Set CMP0135 policy to NEW to avoid the warning
+cmake_policy(SET CMP0135 NEW)
 FetchContent_Declare(fmt
     GIT_REPOSITORY https://github.com/fmtlib/fmt.git
     GIT_TAG 9.1.0
@@ -44,6 +45,9 @@ FetchContent_Declare(backward
         GIT_REPOSITORY https://github.com/bombela/backward-cpp
         GIT_TAG v1.6)
 FetchContent_MakeAvailable(backward)
+
+# Set compiler flags
+add_compile_options(-W -Wall)
 
 add_subdirectory(tls)
 

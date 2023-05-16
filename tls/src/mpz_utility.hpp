@@ -49,13 +49,13 @@ mpz_class randomPrime(unsigned int byte) {
     std::uniform_int_distribution<> dist(0, 0xff);
     std::random_device rd;
 
-    for (int i = 0; i < byte; i++) {
+    for (unsigned int i = 0; i < byte; i++) {
         buf[i] = dist(rd);
     }
 
     auto z = nextPrime(bnd2mpz(buf, buf + byte));
 
-    for (int i = 0; i < byte; i++) {
+    for (unsigned int i = 0; i < byte; i++) {
         buf[i] = 0xff;
     }
     // If the generated number is bigger than the maximum value of the byte size
