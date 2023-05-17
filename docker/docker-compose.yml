@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  develop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+
+
+# docker-compose up -d
+# docker-compose exec develop bash
+# docker-compose down
+# docker-compose ps

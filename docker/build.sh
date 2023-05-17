@@ -26,7 +26,14 @@ make -j "$cores" && make install -j "$cores"
 # Return to workdir
 cd ..
 
-# Clone repository to tls
-mkdir tls
-cd tls
+# Delete tar files
+rm *.tar*
+rm build.sh
+
+# Clone repository to work
+mkdir work
+cd work
 git clone https://github.com/JLGGG/basic-tls.git
+
+# Make build directory for CMake in working directory (comfortable)
+mkdir /workdir/work/basic-tls/build
