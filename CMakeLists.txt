@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.23)
 project(tls_main)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -13,8 +13,6 @@ include_directories("/usr/local/lib")
 set(GMP_LIBRARY "/usr/local/lib/libgmp.a")
 set(GMPXX_LIBRARY "/usr/local/lib/libgmpxx.a")
 
-# set(CMAKE_C_COMPILER /usr/bin/gcc CACHE PATH "" FORCE)
-# set(CMAKE_CXX_COMPILER /usr/bin/g++ CACHE PATH "" FORCE)
 message("CMAKE_C_COMPILER: ${CMAKE_C_COMPILER}")
 message("CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
 
@@ -29,9 +27,19 @@ FetchContent_MakeAvailable(fmt)
 
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        release-1.12.1
 )
-FetchContent_MakeAvailable(googletest)
+set(gtest_build_tests OFF CACHE BOOL "Enable gtest tests" FORCE)
+
+FetchContent_Declare(
+  googlebenchmark
+  GIT_REPOSITORY https://github.com/google/benchmark.git
+  GIT_TAG        v1.8.0
+)
+set(benchmark_enable_testing OFF CACHE BOOL "Enable gbench tests" FORCE)
+
+FetchContent_MakeAvailable(googletest googlebenchmark)
 
 # Also requires one of: libbfd (gnu binutils), libdwarf, libdw (elfutils)
 # When using a stack trace, you must link ${BACKWARD_ENABLE} to the add_library or add_executable command.

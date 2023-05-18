@@ -18,4 +18,4 @@ struct DiffieHellman {
     FCBC2EC22005C58EF1837D1683B2C6F34A26C1B2EFFA886B423861285C97FFFFFFFFFFFFFFFF"};
 
     mpz_class k, g = 2, private_key = randomPrime(255), y = powm(g, private_key, prime);
-}
+};

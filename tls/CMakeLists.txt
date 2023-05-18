@@ -10,8 +10,9 @@ add_backward(${PROJECT_NAME})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC 
     fmt::fmt
-    ${GMP_LIBRARY}
+    # GML_LIBRARY is speficied after the GMPXX_LIBRARY
     ${GMPXX_LIBRARY}
+    ${GMP_LIBRARY}
 )
 target_include_directories(${PROJECT_NAME} PUBLIC 
     src
