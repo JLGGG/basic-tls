@@ -8,18 +8,13 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Manually set the GMP library and include paths
-# include_directories("/usr/local/include")
-# include_directories("/usr/local/lib")
-# set(GMP_LIBRARY "/usr/local/lib/libgmp.a")
-# set(GMPXX_LIBRARY "/usr/local/lib/libgmpxx.a")
+include_directories("/usr/local/include")
+include_directories("/usr/local/lib")
+set(GMP_LIBRARY "/usr/local/lib/libgmp.a")
+set(GMPXX_LIBRARY "/usr/local/lib/libgmpxx.a")
 
-include_directories("/opt/homebrew/Cellar/gmp/6.2.1_1/include")
-include_directories("/opt/homebrew/Cellar/gmp/6.2.1_1/lib")
-set(GMP_LIBRARY "/opt/homebrew/Cellar/gmp/6.2.1_1/lib/libgmp.a")
-set(GMPXX_LIBRARY "/opt/homebrew/Cellar/gmp/6.2.1_1/lib/libgmpxx.a")
-
-set(CMAKE_C_COMPILER /usr/bin/gcc CACHE PATH "" FORCE)
-set(CMAKE_CXX_COMPILER /usr/bin/g++ CACHE PATH "" FORCE)
+# set(CMAKE_C_COMPILER /usr/bin/gcc CACHE PATH "" FORCE)
+# set(CMAKE_CXX_COMPILER /usr/bin/g++ CACHE PATH "" FORCE)
 message("CMAKE_C_COMPILER: ${CMAKE_C_COMPILER}")
 message("CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
 
