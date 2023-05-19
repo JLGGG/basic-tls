@@ -1,5 +1,37 @@
 cmake_minimum_required(VERSION 3.23)
+
+# Introduce the ccache for build speedup
+# https://crascit.com/2016/04/09/using-ccache-with-cmake/
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+  message(STATUS "CCache Found")
+  set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+else()
+  message(STATUS "CCache Not Found")
+endif()
+
 project(tls_main)
+
+# # Function to delete build files in subdirectories
+# function(delete_build_files_in_subdirectories)
+#   file(GLOB SUBDIRECTORIES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/*)
+#   foreach(SUBDIRECTORY ${SUBDIRECTORIES})
+#       if(IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY})
+#           message(STATUS "Deleting build files in ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY}")
+#           file(REMOVE ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY}/CMakeFiles 
+#           ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY}/CMakeCache.txt 
+#           ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY}/Makefile 
+#           ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY}/cmake_install.cmake)
+#       endif()
+#   endforeach()
+# endfunction()
+
+# Prevent cmake in case of not using build folder
+# Check if the current directory is the build directory
+# if(NOT "${CMAKE_CURRENT_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_BINARY_DIR}")
+#     # delete_build_files_in_subdirectories()
+#     message(FATAL_ERROR "CMake must be run from the build directory.")
+# endif()
 
 set(CMAKE_CXX_STANDARD 20)
 
