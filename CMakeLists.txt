@@ -12,26 +12,12 @@ endif()
 
 project(tls_main)
 
-# # Function to delete build files in subdirectories
-# function(delete_build_files_in_subdirectories)
-#   file(GLOB SUBDIRECTORIES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/*)
-#   foreach(SUBDIRECTORY ${SUBDIRECTORIES})
-#       if(IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY})
-#           message(STATUS "Deleting build files in ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY}")
-#           file(REMOVE ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY}/CMakeFiles 
-#           ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY}/CMakeCache.txt 
-#           ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY}/Makefile 
-#           ${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIRECTORY}/cmake_install.cmake)
-#       endif()
-#   endforeach()
-# endfunction()
-
 # Prevent cmake in case of not using build folder
-# Check if the current directory is the build directory
-# if(NOT "${CMAKE_CURRENT_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_BINARY_DIR}")
-#     # delete_build_files_in_subdirectories()
-#     message(FATAL_ERROR "CMake must be run from the build directory.")
-# endif()
+file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
+message(STATUS "LOC_PATH: ${LOC_PATH}")
+if(EXISTS "${LOC_PATH}")
+  message(FATAL_ERROR "You cannot build in a source directory (or any directory with a CMakeLists.txt file). Please make a build subdirectory.")
+endif()
 
 set(CMAKE_CXX_STANDARD 20)
 
