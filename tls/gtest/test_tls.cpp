@@ -30,3 +30,7 @@ TEST_F(TestTls, DiffieHellman) {
   mpz_class bob_shared_secret = bob.setPeerPublicKey(alice_public_key);
   EXPECT_EQ(alice_shared_secret, bob_shared_secret);
 }
+
+TEST_F(TestTls, ECDHE) {
+
+}
